@@ -2,7 +2,7 @@ export default function ScreenItem({ onChange, data }) {
     console.log("data:", data);
     return (
       <div>
-          <img className={"classic-border-top"} src={"/src/assets/border.png"} />
+         I
           {/* Render `data` divs directly */}
           <form onSubmit={onChange}>
               {Array.from({ length: data }, (_, i) => (
@@ -16,7 +16,7 @@ export default function ScreenItem({ onChange, data }) {
               ))}
               <button type="submit" className={"button-1"}>Play</button>
           </form>
-          <img className={"classic-border-bottom"} src={"/src/assets/border.png"} />
+          <img className={"classic-border-bottom"} src={"/assets/border.png"} />
       </div>
     );
 };

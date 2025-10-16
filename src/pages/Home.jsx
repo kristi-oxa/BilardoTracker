@@ -47,7 +47,7 @@ export function Home() {
     return (
       <div>
           <div className={"modal"}>
-              <img alt={"border"} className={"classic-border-top"} src={"/src/assets/border.png"} />
+              <img alt={"border"} className={"classic-border-top"} src={"/assets/border.png"} />
               <h2>
                   MBAJTESI I PIKEVE!
               </h2>
@@ -64,7 +64,7 @@ export function Home() {
               {screen < 2 &&
                 <Button onClick={setUpdateStep} updateStep={1} buttonId={"1"} buttonText={"Next"} />}
 
-              <img alt={"border"} className={"classic-border-bottom"} src={"/src/assets/border.png"} />
+              <img alt={"border"} className={"classic-border-bottom"} src={"/assets/border.png"} />
           </div>
       </div>
     );

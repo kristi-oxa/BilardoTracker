@@ -64,7 +64,7 @@ export default function ScreenItem({ onChange, data }) {
                     <td>
                         {points[index].map((i) => <img onClick={() => {
                             queue == index && deletePoints(queue, i)
-                        }} key={i + 1} src={"/assets/balls/" + `${i}.png`} alt="bila"
+                        }} key={i + 1} src={"../../assets/balls/" + `${i}.png`} alt="bila"
                                                        style={{ width: '20px', marginRight: '2px' }} />)}
                     </td>
                 </tr>
@@ -77,7 +77,7 @@ export default function ScreenItem({ onChange, data }) {
                     {i % 5 === 0 && i !== 0 && <br />}
                     <img onClick={() => {
                         addPoints(queue, i)
-                    }} src={"/assets/balls/" + `${i}.png`} alt="bila"
+                    }} src={"../../assets/balls/" + `${i}.png`} alt="bila"
                          style={{ width: '50px', marginTop: '10px', marginRight: '10px' }} />
                 </React.Fragment>
               ))}

@@ -11,17 +11,9 @@ const __dirname = path.dirname(__filename);
 // Serve static files from Vite build
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// SPA routes: serve index.html for all unmatched paths
+// SPA fallback for all other routes
 app.use((req, res) => {
-    // List of actual routes your SPA handles
-    const spaRoutes = ['/'];
-
-    if (spaRoutes.includes(req.path)) {
-        res.sendFile(path.join(__dirname, '', 'index.html'));
-    } else {
-        // 404 for everything else
-        res.status(404).sendFile(path.join(__dirname, '', '404.html'));
-    }
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;

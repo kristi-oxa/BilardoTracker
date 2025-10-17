@@ -2,33 +2,34 @@ import React, { useState } from 'react';
 
 export default function ScreenItem({ onChange, data }) {
     const [ queue, setQueue ] = React.useState(0);
-    console.log(data.length)
+
     const [ points, setPoints ] = useState(Array.from({ length: data.length }, () => []))
     const [ pointsSum, setPointsSum ] = useState(Array.from({ length: data.length }, () => 0))
     const [ balls, setBalls ] = useState(Array.from({ length: 15 }, (_, i) => i + 1));
-    console.log(balls)
-
+    const [ winners, setWinners ] = useState([]);
+    console.log(winners)
     function addPoints(playerIndex, point) {
         const newPoints = points;
-        console.log(newPoints);
         newPoints[playerIndex] = [ ...newPoints[playerIndex], point ];
         setBalls(balls.filter(b => b !== point));
         setPoints(newPoints);
         setPointsSum(pointsSum.map((sum, index) => index === playerIndex ? sum + point : sum));
 
-        if(pointsSum[playerIndex] + point >= 60) {
+        if(pointsSum[playerIndex] + point >= 120/data.length) {
             alert(data[playerIndex] + " fitoi!");
+            setWinners([ ...winners, playerIndex ]);
         }
     }
 
     function deletePoints(playerIndex, ballIndex) {
-        console.log("Fshirje")
         const newPoints = points;
-        console.log(newPoints)
+
         newPoints[playerIndex] = newPoints[playerIndex].filter(p => p !== ballIndex);
         setBalls([ ...balls, ballIndex ].sort((a, b) => a - b));
         setPoints(newPoints);
+        setPointsSum(pointsSum.map((sum, index) => index === playerIndex ? sum - ballIndex : sum));
     }
+
 
 
     return (
@@ -55,11 +56,13 @@ export default function ScreenItem({ onChange, data }) {
                 <tr key={index}>
                     <td>
                         <button onClick={() => {
-                            setQueue(index)
+                            if(!winners.includes(index)){
+                                setQueue(index)
+                            }
                         }}
-                                className={queue == index ? "button-1" : "button-1 not-highlighted"}>{queue == index ? "Po gjuan: >>" : "Merr rradhen"}</button>
+                                className={(queue == index && !winners.includes(index)) ? "button-1" : "button-1 not-highlighted"}>{queue == index ? "Po gjuan: >>" : "Merr rradhen"}</button>
                     </td>
-                    <td>{player}</td>
+                    <td>{player}{winners.includes(index) && <img width={20} alt={"fituesi"} src={"../../assets/medals/"+(winners.indexOf(index)+1)+".png"} /> }</td>
                     <td>{pointsSum[index]}</td>
                     <td>
                         {points[index].map((i) => <img onClick={() => {
@@ -76,7 +79,9 @@ export default function ScreenItem({ onChange, data }) {
                 <React.Fragment key={i}>
                     {i % 5 === 0 && i !== 0 && <br />}
                     <img onClick={() => {
+                        if(!winners.includes(queue))
                         addPoints(queue, i)
+                        else alert("Lojtari "+data[queue]+" ka fituar, nuk mund te gjuaje me!")
                     }} src={"../../assets/balls/" + `${i}.png`} alt="bila"
                          style={{ width: '50px', marginTop: '10px', marginRight: '10px' }} />
                 </React.Fragment>

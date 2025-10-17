@@ -2,7 +2,6 @@ export default function ScreenItem({ onChange, data }) {
     console.log("data:", data);
     return (
       <div>
-         I
           {/* Render `data` divs directly */}
           <form onSubmit={onChange}>
               {Array.from({ length: data }, (_, i) => (

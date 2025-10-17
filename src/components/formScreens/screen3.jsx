@@ -28,6 +28,9 @@ export default function ScreenItem({ onChange, data }) {
         setBalls([ ...balls, ballIndex ].sort((a, b) => a - b));
         setPoints(newPoints);
         setPointsSum(pointsSum.map((sum, index) => index === playerIndex ? sum - ballIndex : sum));
+        if(winners.includes(playerIndex)){
+            setWinners(winners.filter(w => w !== playerIndex));
+        }
     }
 
 
@@ -56,11 +59,9 @@ export default function ScreenItem({ onChange, data }) {
                 <tr key={index}>
                     <td>
                         <button onClick={() => {
-                            if(!winners.includes(index)){
-                                setQueue(index)
-                            }
+                            setQueue(index)
                         }}
-                                className={(queue == index && !winners.includes(index)) ? "button-1" : "button-1 not-highlighted"}>{queue == index ? "Po gjuan: >>" : "Merr rradhen"}</button>
+                                className={(queue == index) ? "button-1" : "button-1 not-highlighted"}>{queue == index ? "Po gjuan: >>" : "Merr rradhen"}</button>
                     </td>
                     <td>{player}{winners.includes(index) && <img width={20} alt={"fituesi"} src={"../../assets/medals/"+(winners.indexOf(index)+1)+".png"} /> }</td>
                     <td>{pointsSum[index]}</td>
